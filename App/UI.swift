@@ -7,7 +7,7 @@ struct NearbyStationView: View, Sendable {
     
     var body: some View {
         Text(fetcher.closestStop.stopName).font(Font.title)
-        Text("(" + String(round(fetcher.closestStop.distanceMiles ?? 0.0)) + " miles)").font(Font.caption)
+        Text("(" + String(round(fetcher.closestStop.distanceMiles ?? -1.0)) + " miles)").font(Font.caption)
         List {
             ForEach(fetcher.departuresMinutes.keys.sorted(), id: \.self) {
                 routeName in

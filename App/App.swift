@@ -1,7 +1,7 @@
 import SwiftUI
 
 @main
-struct TransitWidget: App {
+struct Poppy: App {
     @StateObject private var fetcher = TransitDataFetcher()
     
     var body: some Scene {

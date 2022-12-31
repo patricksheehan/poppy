@@ -16,14 +16,30 @@ struct RouteArrivals: Identifiable {
 
 let GTFS_DB_URL = Bundle.main.path(forResource: "gtfs", ofType: "db")!
 
-class TransitDataFetcher: ObservableObject {
+
+
+class TransitDataFetcher: NSObject, ObservableObject, CLLocationManagerDelegate {
     @Published var departuresMinutes: [String: [Int]] = [:]
     @Published var closestStop: Stop = Stop(stopID: "Fake", stopName: "Loading", platformIDs: ["Fake"])
     @Published var lastUpdated: String?
     
     let gtfsrtUrlString = "https://api.bart.gov/gtfsrt/tripupdate.aspx"
+    var feedMessage: TransitRealtime_FeedMessage?
+    var locationManager = CLLocationManager()
+    var userLocation: CLLocation = CLLocation(latitude: 37.764831501887876, longitude: -122.42142043985223)
+    var gtfsDb: Connection?
     
-    var gtfsDb: OpaquePointer?
+    override init() {
+        super.init()
+        locationManager.delegate = self
+        locationManager.desiredAccuracy = kCLLocationAccuracyHundredMeters
+        locationManager.requestWhenInUseAuthorization()
+        do {
+            gtfsDb = try Connection(GTFS_DB_URL, readonly: true)
+        } catch {
+            print("Not able to connect to DB")
+        }
+    }
     
     enum FetchError: Error {
         case badRequest
@@ -38,32 +54,73 @@ class TransitDataFetcher: ObservableObject {
         guard (response as? HTTPURLResponse)?.statusCode == 200 else { throw FetchError.badRequest }
         
         Task { @MainActor in
-            // Get the scheduled trips for the closest stop.
-            let now = Date()
-            let gtfsDb = try Connection(GTFS_DB_URL, readonly: true)
-            let userLocation = CLLocation(latitude: 37.768840, longitude: -122.433270)
-            closestStop = getClosestStopSQL(lat: userLocation.coordinate.latitude, lon: userLocation.coordinate.longitude, db: gtfsDb)!
-            let activeServiceIDs = getActiveServices(date: now, db: gtfsDb)
-            let departures = getScheduledDepartures(stop: closestStop, serviceIDs: activeServiceIDs, date: now, db: gtfsDb)
-            let feedMessage = try TransitRealtime_FeedMessage(serializedData: data)
-            let updatedDepartures = updateDepartures(stop: closestStop, feedMessage: feedMessage, departures: departures)
-            let routeDepartures = getRouteDepartures(departures: updatedDepartures, db: gtfsDb)
-            let nextThreeDepartures = routeDepartures.mapValues { dates in
-                return dates.sorted(by: <).prefix(3)
-            }
-            departuresMinutes = nextThreeDepartures.mapValues { dates in
-                return dates.map { date in
-                    let minutesUntilDate = Int(date.timeIntervalSinceNow / 60)
-                    return minutesUntilDate
-                }
-            }
-            let dateFormatter = DateFormatter()
-            dateFormatter.dateStyle = .long
-            dateFormatter.timeStyle = .short
-            dateFormatter.doesRelativeDateFormatting = true
-            lastUpdated = dateFormatter.string(from: now)
+            feedMessage = try TransitRealtime_FeedMessage(serializedData: data)
+            calculateDepartures()
         }
     }
+    
+    func calculateDepartures() {
+        let now = Date()
+        var updatedDepartures: [String: Date]?
+        
+        // Find the closest station to the user.
+        locationManager.requestLocation()
+        closestStop = getClosestStopSQL(location: userLocation, db: gtfsDb!)!
+        
+        // Figure out the scheduled departures for that station.
+        let activeServiceIDs = getActiveServices(date: now, db: gtfsDb!)
+        let departures = getScheduledDepartures(stop: closestStop, serviceIDs: activeServiceIDs, date: now, db: gtfsDb!)
+        
+        if feedMessage != nil {
+            updatedDepartures = updateDepartures(stop: closestStop, feedMessage: feedMessage!, departures: departures)
+        } else {
+            updatedDepartures = departures
+        }
+        
+        // Convert from dates to the next few departure times in relative minutes, by route.
+        let routeDepartures = getRouteDepartures(departures: updatedDepartures!, db: gtfsDb!)
+        let nextThreeDepartures = routeDepartures.mapValues { dates in
+            return dates.sorted(by: <).prefix(3)
+        }
+        departuresMinutes = nextThreeDepartures.mapValues { dates in
+            return dates.map { date in
+                let minutesUntilDate = Int(date.timeIntervalSinceNow / 60)
+                return minutesUntilDate
+            }
+        }
+        
+        // Publish an update time so users know how recent the times are.
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateStyle = .long
+        dateFormatter.timeStyle = .short
+        dateFormatter.doesRelativeDateFormatting = true
+        lastUpdated = dateFormatter.string(from: now)
+    }
+    
+    func locationManager(
+        _ manager: CLLocationManager,
+        didChangeAuthorization status: CLAuthorizationStatus
+    ) {
+        calculateDepartures()
+    }
+
+    func locationManager(
+        _ manager: CLLocationManager,
+        didUpdateLocations locations: [CLLocation]
+    ) {
+        if let location = locations.last {
+            userLocation = location
+        }
+    }
+
+    func locationManager(
+        _ manager: CLLocationManager,
+        didFailWithError error: Error
+    ) {
+        print("Failed to get user location")
+        print(error)
+    }
+    
 }
 
 
@@ -158,18 +215,33 @@ func getActiveServices(date: Date, db: Connection) -> [String] {
 }
 
 
-func getClosestStopSQL(lat: Double, lon: Double, db: Connection) -> Stop? {
+func getClosestStopSQL(location: CLLocation, db: Connection) -> Stop? {
     // Set up the SQLite statement we'll need
-    var query = "SELECT stop_id, stop_lat, stop_lon, stop_name, ((\(lat) - stop_lat) * (\(lat) - stop_lat)) + ((\(lon) - stop_lon) * (\(lon) - stop_lon)) AS distance FROM stops WHERE location_type = 1 ORDER BY distance ASC LIMIT 1"
+    var closestStop: Stop = Stop(
+        stopID: "Placeholder", stopName: "Placeholder", platformIDs: [], distanceMiles: Double.greatestFiniteMagnitude
+    )
+    
+    let query = "SELECT stop_id, stop_lat, stop_lon, stop_name FROM stops WHERE location_type = 1"
+    
     do {
-        var platformIDs: [String] = []
-        let row = try db.prepare(query).next()!
-        let id = row[0] as! String
-        let distanceMiles = row[4]! as! Double * 0.000621371
-        for platformRow in try db.prepare("SELECT stop_id FROM stops WHERE parent_station = \"\(id)\" AND location_type = 0") {
-            platformIDs.append(platformRow[0] as! String)
+        // Get all stops, calculate distances to find closest stop.
+        for row in try db.prepare(query) {
+            let distanceMeters = location.distance(from: CLLocation(latitude: row[1]! as! Double, longitude: row[2]! as! Double))
+            let distanceMiles = distanceMeters * 0.000621371
+            if distanceMiles < closestStop.distanceMiles! {
+                let id = row[0] as! String
+                let name = row[3] as! String
+                closestStop = Stop(stopID: id, stopName: name, platformIDs: [], distanceMiles: distanceMiles)
+            }
         }
-        return Stop(stopID: id, stopName: row[3] as! String, platformIDs: platformIDs, distanceMiles: distanceMiles)
+        
+        // Find all platforms for closest stop.
+        let platformQuery = "SELECT stop_id FROM stops WHERE parent_station = \"\(closestStop.stopID)\" AND location_type = 0"
+        for platformRow in try db.prepare(platformQuery) {
+            closestStop.platformIDs.append(platformRow[0] as! String)
+        }
+        
+        return closestStop
     } catch {
         print("Issue fetching closest stop")
     }
