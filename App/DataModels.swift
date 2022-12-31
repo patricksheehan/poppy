@@ -93,7 +93,9 @@ class TransitDataFetcher: NSObject, ObservableObject, CLLocationManagerDelegate 
                 return minute <= 120
             }
         }
-        
+        departuresMinutes = departuresMinutes.filter { route, departures in
+            return !departures.isEmpty
+        }
         
         // Publish an update time so users know how recent the times are.
         let dateFormatter = DateFormatter()
