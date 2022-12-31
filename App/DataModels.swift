@@ -88,6 +88,12 @@ class TransitDataFetcher: NSObject, ObservableObject, CLLocationManagerDelegate 
                 return minutesUntilDate
             }
         }
+        departuresMinutes = departuresMinutes.mapValues { minutes in
+            return minutes.filter { minute in
+                return minute <= 120
+            }
+        }
+        
         
         // Publish an update time so users know how recent the times are.
         let dateFormatter = DateFormatter()
