@@ -34,7 +34,6 @@ struct NearbyStationView: View, Sendable {
                     )
                     .foregroundColor(CustomColor.violet)
             }
-            .padding(.bottom)
             List {
                 ForEach(fetcher.departuresMinutes.keys.sorted(), id: \.self) {
                     routeName in
