@@ -213,8 +213,8 @@ func getActiveServices(date: Date, db: Connection) -> [String] {
         
         // Get the active dates, exclude special dates.
         let query = """
-            SELECT service_id
-            FROM calendar JOIN calendar_dates ON service_id
+            SELECT calendar.service_id
+            FROM calendar JOIN calendar_dates ON calendar.service_id = calendar_dates.service_id
             WHERE
                 (\(weekday) = 1 AND start_date <= \(dateInteger) AND end_date >= \(dateInteger) AND date != \(dateInteger))
                 OR

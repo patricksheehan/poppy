@@ -7,6 +7,9 @@ struct CustomColor {
     static let base02 = Color("solarized_base02")
     static let violet = Color("solarized_violet")
     static let orange = Color("solarized_orange")
+    static let yellow = Color("solarized_yellow")
+    static let logoOrange = Color("logo_orange")
+    static let logoPurple = Color("logo_purple")
 }
 
 struct NearbyStationView: View, Sendable {
@@ -23,7 +26,7 @@ struct NearbyStationView: View, Sendable {
                             relativeTo: .title
                         )
                     )
-                    .foregroundColor(CustomColor.violet)
+                    .foregroundColor(CustomColor.logoOrange)
                 Text("(" + String(round(fetcher.closestStop.distanceMiles ?? -1.0)) + " miles away)")
                     .font(
                         .custom(
@@ -32,7 +35,7 @@ struct NearbyStationView: View, Sendable {
                             relativeTo: .footnote
                         )
                     )
-                    .foregroundColor(CustomColor.violet)
+                    .foregroundColor(CustomColor.logoOrange)
             }
             List {
                 ForEach(fetcher.departuresMinutes.keys.sorted(), id: \.self) {
@@ -61,6 +64,7 @@ struct NearbyStationView: View, Sendable {
                     }
                 }
                 .listRowBackground(CustomColor.base02)
+                .background(CustomColor.base03)
             }
             .scrollContentBackground(.hidden)
             .listStyle(.plain)
@@ -75,7 +79,7 @@ struct NearbyStationView: View, Sendable {
                         relativeTo: .footnote
                     )
                 )
-                .foregroundColor(CustomColor.violet)
+                .foregroundColor(CustomColor.logoOrange)
         }
         .background(CustomColor.base03)
         .task {
