@@ -14,55 +14,61 @@ struct NearbyStationView: View, Sendable {
     
     var body: some View {
         VStack {
-            Text(fetcher.closestStop.stopName)
-                .font(
-                    .custom(
-                        "RobotoMono-Regular",
-                        size: 25,
-                        relativeTo: .title
+            VStack{
+                Text(fetcher.closestStop.stopName)
+                    .font(
+                        .custom(
+                            "RobotoMono-Regular",
+                            size: 25,
+                            relativeTo: .title
+                        )
                     )
-                )
-                .foregroundColor(CustomColor.violet)
-            Text("(" + String(round(fetcher.closestStop.distanceMiles ?? -1.0)) + " miles away)")
-                .font(
-                    .custom(
-                        "RobotoMono-Regular",
-                        size: 16,
-                        relativeTo: .footnote
+                    .foregroundColor(CustomColor.violet)
+                Text("(" + String(round(fetcher.closestStop.distanceMiles ?? -1.0)) + " miles away)")
+                    .font(
+                        .custom(
+                            "RobotoMono-Regular",
+                            size: 16,
+                            relativeTo: .footnote
+                        )
                     )
-                )
-                .foregroundColor(CustomColor.violet)
+                    .foregroundColor(CustomColor.violet)
+            }
+            .padding(.bottom)
             List {
                 ForEach(fetcher.departuresMinutes.keys.sorted(), id: \.self) {
                     routeName in
-                    HStack{
-                        Text(routeName.prefix(18) + ":")
-                            .font(
-                                .custom(
-                                    "RobotoMono-Regular",
-                                    size: 18,
-                                    relativeTo: .headline
+                    ZStack {
+                        HStack {
+                            Text(routeName.prefix(18) + ":")
+                                .font(
+                                    .custom(
+                                        "RobotoMono-Regular",
+                                        size: 18,
+                                        relativeTo: .headline
+                                    )
                                 )
-                            )
-                            .foregroundColor(CustomColor.violet)
-                        Text(fetcher.departuresMinutes[routeName]!.map{String($0)}.joined(separator: ", "))
-                            .font(
-                                .custom(
-                                    "RobotoMono-Regular",
-                                    size: 18,
-                                    relativeTo: .headline
+                                .foregroundColor(CustomColor.violet)
+                            Spacer()
+                        }
+                        HStack {
+                            Spacer()
+                            Text(fetcher.departuresMinutes[routeName]!.map{String($0)}.joined(separator: ", "))
+                                .font(
+                                    .custom(
+                                        "RobotoMono-Regular",
+                                        size: 18,
+                                        relativeTo: .headline
+                                    )
                                 )
-                            )
-                            .foregroundColor(CustomColor.orange)
+                                .foregroundColor(CustomColor.orange)
+                        }
                     }
                 }
                 .listRowBackground(CustomColor.base02)
             }
             .scrollContentBackground(.hidden)
-            .padding()
-            .task {
-                try? await fetcher.fetchData()
-            }
+            .listStyle(.plain)
             .refreshable {
                 try? await fetcher.fetchData()
             }
@@ -77,5 +83,8 @@ struct NearbyStationView: View, Sendable {
                 .foregroundColor(CustomColor.violet)
         }
         .background(CustomColor.base03)
+        .task {
+            try? await fetcher.fetchData()
+        }
     }
 }
