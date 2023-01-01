@@ -37,31 +37,27 @@ struct NearbyStationView: View, Sendable {
             List {
                 ForEach(fetcher.departuresMinutes.keys.sorted(), id: \.self) {
                     routeName in
-                    ZStack {
-                        HStack {
-                            Text(routeName.prefix(18) + ":")
-                                .font(
-                                    .custom(
-                                        "RobotoMono-Regular",
-                                        size: 18,
-                                        relativeTo: .headline
-                                    )
+                    HStack {
+                        Text(routeName + ":")
+                            .font(
+                                .custom(
+                                    "RobotoMono-Regular",
+                                    size: 18,
+                                    relativeTo: .headline
                                 )
-                                .foregroundColor(CustomColor.violet)
-                            Spacer()
-                        }
-                        HStack {
-                            Spacer()
-                            Text(fetcher.departuresMinutes[routeName]!.map{String($0)}.joined(separator: ", "))
-                                .font(
-                                    .custom(
-                                        "RobotoMono-Regular",
-                                        size: 18,
-                                        relativeTo: .headline
-                                    )
+                            )
+                            .foregroundColor(CustomColor.violet)
+                            .scaledToFit()
+                        Spacer()
+                        Text(fetcher.departuresMinutes[routeName]!.map{String($0)}.joined(separator: ", "))
+                            .font(
+                                .custom(
+                                    "RobotoMono-Regular",
+                                    size: 18,
+                                    relativeTo: .headline
                                 )
-                                .foregroundColor(CustomColor.orange)
-                        }
+                            )
+                            .foregroundColor(CustomColor.orange)
                     }
                 }
                 .listRowBackground(CustomColor.base02)
