@@ -60,11 +60,10 @@ struct NearbyStationView: View, Sendable {
                                     relativeTo: .headline
                                 )
                             )
-                            .foregroundColor(CustomColor.orange)
+                            .foregroundColor(CustomColor.violet)
                     }
                 }
-                .listRowBackground(CustomColor.base02)
-                .background(CustomColor.base03)
+                .listRowBackground(CustomColor.base03)
             }
             .scrollContentBackground(.hidden)
             .listStyle(.plain)
