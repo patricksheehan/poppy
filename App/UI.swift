@@ -27,7 +27,7 @@ struct NearbyStationView: View, Sendable {
                         )
                     )
                     .foregroundColor(CustomColor.logoOrange)
-                Text("(" + String(round((fetcher.closestStop.distanceMiles  ?? -1.0)*10)/10.0)) + " miles away)")
+                Text("(" + String(round((fetcher.closestStop.distanceMiles  ?? -1.0)*10)/10.0) + " miles away)")
                     .font(
                         .custom(
                             "RobotoMono-Regular",
