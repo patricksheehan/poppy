@@ -211,6 +211,7 @@ func getActiveServices(date: Date, db: Connection) -> [String] {
         formatter.dateFormat = "yyyyMMdd"
         let dateInteger = Int(formatter.string(from: date))!
         
+        // Get the active dates, exclude special dates.
         let query = """
             SELECT service_id
             FROM calendar JOIN calendar_dates ON service_id
