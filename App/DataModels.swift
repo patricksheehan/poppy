@@ -55,7 +55,7 @@ class TransitDataFetcher: NSObject, ObservableObject, CLLocationManagerDelegate 
         
         Task { @MainActor in
             feedMessage = try TransitRealtime_FeedMessage(serializedData: data)
-            calculateDepartures()
+            locationManager.requestLocation()
         }
     }
     
@@ -64,7 +64,6 @@ class TransitDataFetcher: NSObject, ObservableObject, CLLocationManagerDelegate 
         var updatedDepartures: [String: Date]?
         
         // Find the closest station to the user.
-        locationManager.requestLocation()
         closestStop = getClosestStopSQL(location: userLocation, db: gtfsDb!)!
         
         // Figure out the scheduled departures for that station.
@@ -109,7 +108,7 @@ class TransitDataFetcher: NSObject, ObservableObject, CLLocationManagerDelegate 
         _ manager: CLLocationManager,
         didChangeAuthorization status: CLAuthorizationStatus
     ) {
-        calculateDepartures()
+        locationManager.requestLocation()
     }
 
     func locationManager(
@@ -119,6 +118,7 @@ class TransitDataFetcher: NSObject, ObservableObject, CLLocationManagerDelegate 
         if let location = locations.last {
             userLocation = location
         }
+        calculateDepartures()
     }
 
     func locationManager(
