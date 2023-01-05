@@ -8,6 +8,7 @@ struct CustomColor {
     static let violet = Color("solarized_violet")
     static let orange = Color("solarized_orange")
     static let yellow = Color("solarized_yellow")
+    static let magenta = Color("solarized_magenta")
     static let logoOrange = Color("logo_orange")
     static let logoPurple = Color("logo_purple")
 }
@@ -22,7 +23,7 @@ struct NearbyStationView: View, Sendable {
                     .font(
                         .custom(
                             "RobotoMono-Regular",
-                            size: 25,
+                            size: 22,
                             relativeTo: .title
                         )
                     )
@@ -31,7 +32,7 @@ struct NearbyStationView: View, Sendable {
                     .font(
                         .custom(
                             "RobotoMono-Regular",
-                            size: 16,
+                            size: 14,
                             relativeTo: .footnote
                         )
                     )
@@ -74,7 +75,7 @@ struct NearbyStationView: View, Sendable {
                 .font(
                     .custom(
                         "RobotoMono-Regular",
-                        size: 16,
+                        size: 14,
                         relativeTo: .footnote
                     )
                 )

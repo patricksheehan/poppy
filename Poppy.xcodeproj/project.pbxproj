@@ -8,6 +8,19 @@
 
 /* Begin PBXBuildFile section */
 		CD17D0E029484C7600D99D7C /* GTFS.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD17D0DF29484C7600D99D7C /* GTFS.swift */; };
+		CD2D580A2964FF2B006EEAF3 /* AsyncLocationKit in Frameworks */ = {isa = PBXBuildFile; productRef = CD2D58092964FF2B006EEAF3 /* AsyncLocationKit */; };
+		CD2D584429664C1C006EEAF3 /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E542136F25387A0200CCC9C3 /* WidgetKit.framework */; };
+		CD2D584529664C1C006EEAF3 /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E542137125387A0200CCC9C3 /* SwiftUI.framework */; };
+		CD2D584829664C1C006EEAF3 /* PoppyWidgetBundle.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD2D584729664C1C006EEAF3 /* PoppyWidgetBundle.swift */; };
+		CD2D584A29664C1C006EEAF3 /* PoppyWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD2D584929664C1C006EEAF3 /* PoppyWidget.swift */; };
+		CD2D584C29664C1F006EEAF3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CD2D584B29664C1F006EEAF3 /* Assets.xcassets */; };
+		CD2D585029664C1F006EEAF3 /* PoppyWidgetExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = CD2D584329664C1C006EEAF3 /* PoppyWidgetExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		CD2D585429665D4C006EEAF3 /* App.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDBC92272946E0BC00679FDA /* App.swift */; };
+		CD2D585529665D4C006EEAF3 /* GTFS.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD17D0DF29484C7600D99D7C /* GTFS.swift */; };
+		CD2D585629665D4C006EEAF3 /* DataModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDBC920B2946E0BC00679FDA /* DataModels.swift */; };
+		CD2D585729665D4C006EEAF3 /* UI.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDBC92262946E0BC00679FDA /* UI.swift */; };
+		CD2D585829666A5A006EEAF3 /* gtfs-realtime.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDBC920C2946E0BC00679FDA /* gtfs-realtime.pb.swift */; };
+		CD2D585929666A5A006EEAF3 /* gtfs.db in Resources */ = {isa = PBXBuildFile; fileRef = CD756B68294CE82400934CFE /* gtfs.db */; };
 		CD756B69294CE82400934CFE /* gtfs.db in Resources */ = {isa = PBXBuildFile; fileRef = CD756B68294CE82400934CFE /* gtfs.db */; };
 		CD756B6D2954163D00934CFE /* SQLite in Frameworks */ = {isa = PBXBuildFile; productRef = CD756B6C2954163D00934CFE /* SQLite */; };
 		CD756B712960220000934CFE /* RobotoMono-Thin.ttf in Resources */ = {isa = PBXBuildFile; fileRef = CD756B702960220000934CFE /* RobotoMono-Thin.ttf */; };
@@ -23,6 +36,16 @@
 		E55551B328E1D3FF005A5321 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = E55551B228E1D3FF005A5321 /* README.md */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXContainerItemProxy section */
+		CD2D584E29664C1F006EEAF3 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = E542134E253879B700CCC9C3 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = CD2D584229664C1C006EEAF3;
+			remoteInfo = PoppyWidgetExtension;
+		};
+/* End PBXContainerItemProxy section */
+
 /* Begin PBXCopyFilesBuildPhase section */
 		E542137F25387A0600CCC9C3 /* Embed Foundation Extensions */ = {
 			isa = PBXCopyFilesBuildPhase;
@@ -30,6 +53,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 13;
 			files = (
+				CD2D585029664C1F006EEAF3 /* PoppyWidgetExtension.appex in Embed Foundation Extensions */,
 			);
 			name = "Embed Foundation Extensions";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -38,6 +62,11 @@
 
 /* Begin PBXFileReference section */
 		CD17D0DF29484C7600D99D7C /* GTFS.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GTFS.swift; sourceTree = "<group>"; };
+		CD2D584329664C1C006EEAF3 /* PoppyWidgetExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = PoppyWidgetExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		CD2D584729664C1C006EEAF3 /* PoppyWidgetBundle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PoppyWidgetBundle.swift; sourceTree = "<group>"; };
+		CD2D584929664C1C006EEAF3 /* PoppyWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PoppyWidget.swift; sourceTree = "<group>"; };
+		CD2D584B29664C1F006EEAF3 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		CD2D584D29664C1F006EEAF3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		CD756B68294CE82400934CFE /* gtfs.db */ = {isa = PBXFileReference; lastKnownFileType = file; path = gtfs.db; sourceTree = "<group>"; };
 		CD756B702960220000934CFE /* RobotoMono-Thin.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "RobotoMono-Thin.ttf"; sourceTree = "<group>"; };
 		CD756B73296022C400934CFE /* RobotoMono-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "RobotoMono-Regular.ttf"; sourceTree = "<group>"; };
@@ -55,6 +84,15 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		CD2D584029664C1C006EEAF3 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				CD2D584529664C1C006EEAF3 /* SwiftUI.framework in Frameworks */,
+				CD2D584429664C1C006EEAF3 /* WidgetKit.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		E5421353253879B700CCC9C3 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -63,12 +101,24 @@
 				CD90BDB02946DB3900CE1056 /* protoc-gen-swift in Frameworks */,
 				CD90BDAE2946DB3900CE1056 /* SwiftProtobufPluginLibrary in Frameworks */,
 				CD90BDAC2946DB3900CE1056 /* SwiftProtobuf in Frameworks */,
+				CD2D580A2964FF2B006EEAF3 /* AsyncLocationKit in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		CD2D584629664C1C006EEAF3 /* PoppyWidget */ = {
+			isa = PBXGroup;
+			children = (
+				CD2D584729664C1C006EEAF3 /* PoppyWidgetBundle.swift */,
+				CD2D584929664C1C006EEAF3 /* PoppyWidget.swift */,
+				CD2D584B29664C1F006EEAF3 /* Assets.xcassets */,
+				CD2D584D29664C1F006EEAF3 /* Info.plist */,
+			);
+			path = PoppyWidget;
+			sourceTree = "<group>";
+		};
 		CDBC920A2946E0BC00679FDA /* App */ = {
 			isa = PBXGroup;
 			children = (
@@ -108,6 +158,7 @@
 			children = (
 				E55551B228E1D3FF005A5321 /* README.md */,
 				CDBC920A2946E0BC00679FDA /* App */,
+				CD2D584629664C1C006EEAF3 /* PoppyWidget */,
 				E542136E25387A0200CCC9C3 /* Frameworks */,
 				E5421357253879B700CCC9C3 /* Products */,
 			);
@@ -117,6 +168,7 @@
 			isa = PBXGroup;
 			children = (
 				E5421356253879B700CCC9C3 /* Poppy.app */,
+				CD2D584329664C1C006EEAF3 /* PoppyWidgetExtension.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -133,6 +185,23 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		CD2D584229664C1C006EEAF3 /* PoppyWidgetExtension */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = CD2D585129664C1F006EEAF3 /* Build configuration list for PBXNativeTarget "PoppyWidgetExtension" */;
+			buildPhases = (
+				CD2D583F29664C1C006EEAF3 /* Sources */,
+				CD2D584029664C1C006EEAF3 /* Frameworks */,
+				CD2D584129664C1C006EEAF3 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = PoppyWidgetExtension;
+			productName = PoppyWidgetExtension;
+			productReference = CD2D584329664C1C006EEAF3 /* PoppyWidgetExtension.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
 		E5421355253879B700CCC9C3 /* Poppy */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = E5421365253879BB00CCC9C3 /* Build configuration list for PBXNativeTarget "Poppy" */;
@@ -145,6 +214,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				CD2D584F29664C1F006EEAF3 /* PBXTargetDependency */,
 			);
 			name = Poppy;
 			packageProductDependencies = (
@@ -152,6 +222,7 @@
 				CD90BDAD2946DB3900CE1056 /* SwiftProtobufPluginLibrary */,
 				CD90BDAF2946DB3900CE1056 /* protoc-gen-swift */,
 				CD756B6C2954163D00934CFE /* SQLite */,
+				CD2D58092964FF2B006EEAF3 /* AsyncLocationKit */,
 			);
 			productName = WidgetExamples;
 			productReference = E5421356253879B700CCC9C3 /* Poppy.app */;
@@ -163,10 +234,13 @@
 		E542134E253879B700CCC9C3 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastSwiftUpdateCheck = 1210;
+				LastSwiftUpdateCheck = 1420;
 				LastUpgradeCheck = 1410;
 				ORGANIZATIONNAME = "Patrick Sheehan";
 				TargetAttributes = {
+					CD2D584229664C1C006EEAF3 = {
+						CreatedOnToolsVersion = 14.2;
+					};
 					E5421355253879B700CCC9C3 = {
 						CreatedOnToolsVersion = 12.0.1;
 					};
@@ -184,17 +258,28 @@
 			packageReferences = (
 				CD90BDAA2946DB3900CE1056 /* XCRemoteSwiftPackageReference "swift-protobuf" */,
 				CD756B6B2954163D00934CFE /* XCRemoteSwiftPackageReference "SQLite" */,
+				CD2D58082964FF2B006EEAF3 /* XCRemoteSwiftPackageReference "AsyncLocationKit" */,
 			);
 			productRefGroup = E5421357253879B700CCC9C3 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
 				E5421355253879B700CCC9C3 /* Poppy */,
+				CD2D584229664C1C006EEAF3 /* PoppyWidgetExtension */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		CD2D584129664C1C006EEAF3 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				CD2D584C29664C1F006EEAF3 /* Assets.xcassets in Resources */,
+				CD2D585929666A5A006EEAF3 /* gtfs.db in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		E5421354253879B700CCC9C3 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -210,6 +295,20 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		CD2D583F29664C1C006EEAF3 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				CD2D585429665D4C006EEAF3 /* App.swift in Sources */,
+				CD2D585529665D4C006EEAF3 /* GTFS.swift in Sources */,
+				CD2D585629665D4C006EEAF3 /* DataModels.swift in Sources */,
+				CD2D585829666A5A006EEAF3 /* gtfs-realtime.pb.swift in Sources */,
+				CD2D584A29664C1C006EEAF3 /* PoppyWidget.swift in Sources */,
+				CD2D584829664C1C006EEAF3 /* PoppyWidgetBundle.swift in Sources */,
+				CD2D585729665D4C006EEAF3 /* UI.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		E5421352253879B700CCC9C3 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -224,7 +323,73 @@
 		};
 /* End PBXSourcesBuildPhase section */
 
+/* Begin PBXTargetDependency section */
+		CD2D584F29664C1F006EEAF3 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = CD2D584229664C1C006EEAF3 /* PoppyWidgetExtension */;
+			targetProxy = CD2D584E29664C1F006EEAF3 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
 /* Begin XCBuildConfiguration section */
+		CD2D585229664C1F006EEAF3 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 9ZW3R444U6;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = PoppyWidget/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = PoppyWidget;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "Copyright © 2023 Patrick Sheehan. All rights reserved.";
+				IPHONEOS_DEPLOYMENT_TARGET = 16.2;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.patricksheehan.PoppyWidget;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		CD2D585329664C1F006EEAF3 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 9ZW3R444U6;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = PoppyWidget/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = PoppyWidget;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "Copyright © 2023 Patrick Sheehan. All rights reserved.";
+				IPHONEOS_DEPLOYMENT_TARGET = 16.2;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.patricksheehan.PoppyWidget;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
 		E5421363253879BB00CCC9C3 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -344,6 +509,7 @@
 		E5421366253879BB00CCC9C3 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = "App/Supporting Files/App.entitlements";
@@ -369,6 +535,7 @@
 		E5421367253879BB00CCC9C3 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = "App/Supporting Files/App.entitlements";
@@ -394,6 +561,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		CD2D585129664C1F006EEAF3 /* Build configuration list for PBXNativeTarget "PoppyWidgetExtension" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				CD2D585229664C1F006EEAF3 /* Debug */,
+				CD2D585329664C1F006EEAF3 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		E5421351253879B700CCC9C3 /* Build configuration list for PBXProject "Poppy" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
@@ -415,6 +591,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		CD2D58082964FF2B006EEAF3 /* XCRemoteSwiftPackageReference "AsyncLocationKit" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/AsyncSwift/AsyncLocationKit.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.0.0;
+			};
+		};
 		CD756B6B2954163D00934CFE /* XCRemoteSwiftPackageReference "SQLite" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/stephencelis/SQLite.swift";
@@ -434,6 +618,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		CD2D58092964FF2B006EEAF3 /* AsyncLocationKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = CD2D58082964FF2B006EEAF3 /* XCRemoteSwiftPackageReference "AsyncLocationKit" */;
+			productName = AsyncLocationKit;
+		};
 		CD756B6C2954163D00934CFE /* SQLite */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = CD756B6B2954163D00934CFE /* XCRemoteSwiftPackageReference "SQLite" */;

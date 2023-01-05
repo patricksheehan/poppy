@@ -1,7 +1,7 @@
 import CoreLocation
-import SQLite3
 import SQLite
 import Foundation
+import AsyncLocationKit
 
 struct StopArrivals {
     let stopName: String
@@ -15,25 +15,24 @@ struct RouteArrivals: Identifiable {
 }
 
 let GTFS_DB_URL = Bundle.main.path(forResource: "gtfs", ofType: "db")!
+let sampleStop = Stop(stopID: "Fake", stopName: "Sample Stop", platformIDs: ["Fake"], distanceMiles: 1.5)
+let sampleDepartures = ["Sample Route": [1, 4, 45]]
 
 
 
 class TransitDataFetcher: NSObject, ObservableObject, CLLocationManagerDelegate {
     @Published var departuresMinutes: [String: [Int]] = [:]
-    @Published var closestStop: Stop = Stop(stopID: "Fake", stopName: "Loading", platformIDs: ["Fake"])
+    @Published var closestStop: Stop = sampleStop
     @Published var lastUpdated: String?
     
     let gtfsrtUrlString = "https://api.bart.gov/gtfsrt/tripupdate.aspx"
     var feedMessage: TransitRealtime_FeedMessage?
-    var locationManager = CLLocationManager()
+    var locationManager = AsyncLocationManager(desiredAccuracy: .hundredMetersAccuracy)
     var userLocation: CLLocation = CLLocation(latitude: 37.764831501887876, longitude: -122.42142043985223)
     var gtfsDb: Connection?
     
     override init() {
         super.init()
-        locationManager.delegate = self
-        locationManager.desiredAccuracy = kCLLocationAccuracyHundredMeters
-        locationManager.requestWhenInUseAuthorization()
         do {
             gtfsDb = try Connection(GTFS_DB_URL, readonly: true)
         } catch {
@@ -52,10 +51,17 @@ class TransitDataFetcher: NSObject, ObservableObject, CLLocationManagerDelegate 
         
         let (data, response) = try await URLSession.shared.data(for: URLRequest(url: url))
         guard (response as? HTTPURLResponse)?.statusCode == 200 else { throw FetchError.badRequest }
+        let locationUpdate = try await locationManager.requestLocation()
         
         Task { @MainActor in
             feedMessage = try TransitRealtime_FeedMessage(serializedData: data)
-            locationManager.requestLocation()
+            switch locationUpdate {
+                case .didUpdateLocations(let locations):
+                    userLocation = locations.last!
+                case .didPaused, .didResume, .none, .didFailWith:
+                    print("no location update")
+            }
+            calculateDepartures()
         }
     }
     
@@ -103,32 +109,6 @@ class TransitDataFetcher: NSObject, ObservableObject, CLLocationManagerDelegate 
         dateFormatter.doesRelativeDateFormatting = true
         lastUpdated = dateFormatter.string(from: now)
     }
-    
-    func locationManager(
-        _ manager: CLLocationManager,
-        didChangeAuthorization status: CLAuthorizationStatus
-    ) {
-        locationManager.requestLocation()
-    }
-
-    func locationManager(
-        _ manager: CLLocationManager,
-        didUpdateLocations locations: [CLLocation]
-    ) {
-        if let location = locations.last {
-            userLocation = location
-        }
-        calculateDepartures()
-    }
-
-    func locationManager(
-        _ manager: CLLocationManager,
-        didFailWithError error: Error
-    ) {
-        print("Failed to get user location")
-        print(error)
-    }
-    
 }
 
 
