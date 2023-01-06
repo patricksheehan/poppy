@@ -23,7 +23,7 @@ let sampleDepartures = ["Sample Route": [1, 4, 45]]
 class TransitDataFetcher: NSObject, ObservableObject, CLLocationManagerDelegate {
     @Published var departuresMinutes: [String: [Int]] = [:]
     @Published var closestStop: Stop = sampleStop
-    @Published var lastUpdated: String?
+    @Published var lastUpdated: Date?
     
     let gtfsrtUrlString = "https://api.bart.gov/gtfsrt/tripupdate.aspx"
     var feedMessage: TransitRealtime_FeedMessage?
@@ -102,12 +102,7 @@ class TransitDataFetcher: NSObject, ObservableObject, CLLocationManagerDelegate 
             return !departures.isEmpty
         }
         
-        // Publish an update time so users know how recent the times are.
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateStyle = .long
-        dateFormatter.timeStyle = .short
-        dateFormatter.doesRelativeDateFormatting = true
-        lastUpdated = dateFormatter.string(from: now)
+        lastUpdated = now
     }
 }
 

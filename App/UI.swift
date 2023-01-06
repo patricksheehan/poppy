@@ -71,15 +71,22 @@ struct NearbyStationView: View, Sendable {
             .refreshable {
                 try? await fetcher.fetchData()
             }
-            Text("Last updated: " + (fetcher.lastUpdated ?? ""))
-                .font(
-                    .custom(
-                        "RobotoMono-Regular",
-                        size: 14,
-                        relativeTo: .footnote
-                    )
+            HStack{
+                Text("Last updated:")
+                if fetcher.lastUpdated != nil {
+                    Text(fetcher.lastUpdated!, style: .relative)
+                    Text("ago")
+                }
+
+            }
+            .font(
+                .custom(
+                    "RobotoMono-Regular",
+                    size: 14,
+                    relativeTo: .footnote
                 )
-                .foregroundColor(CustomColor.logoOrange)
+            )
+            .foregroundColor(CustomColor.logoOrange)
         }
         .background(CustomColor.base03)
         .task {

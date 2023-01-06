@@ -1,5 +1,6 @@
 import SwiftUI
 
+@main
 struct Poppy: App {
     @StateObject private var fetcher = TransitDataFetcher()
     
