@@ -10,7 +10,7 @@ struct Provider: TimelineProvider {
     }
 
     func getSnapshot(in context: Context, completion: @escaping (DeparturesEntry) -> ()) {
-        print("we getting the snapshot")
+        print("snapshot")
         if context.isPreview {
             completion(DeparturesEntry.placeholder)
         } else {
@@ -22,7 +22,7 @@ struct Provider: TimelineProvider {
     }
 
     func getTimeline(in context: Context, completion: @escaping (Timeline<Entry>) -> ()) {
-        print("we getting the timeline")
+        print("tiomeline")
         Task {
             let gtfsDb = try Connection(GTFS_DB_URL, readonly: true)
             var userLocation:  CLLocation = CLLocation(latitude: 37.764831501887876, longitude: -122.42142043985223)
