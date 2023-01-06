@@ -90,7 +90,11 @@ struct NearbyStationView: View, Sendable {
         }
         .background(CustomColor.base03)
         .task {
-            try? await fetcher.fetchData()
+            do {
+                try await fetcher.fetchData()
+            } catch {
+                print("Unexpected error: \(error)")
+            }
         }
     }
 }

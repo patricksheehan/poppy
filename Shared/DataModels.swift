@@ -33,6 +33,12 @@ class TransitDataFetcher: NSObject, ObservableObject, CLLocationManagerDelegate 
     
     override init() {
         super.init()
+        Task {
+            let permission = await locationManager.requestPermission(with: .whenInUsage)
+            if permission != .authorizedWhenInUse {
+                print("not authorized")
+            }
+        }
         do {
             gtfsDb = try Connection(GTFS_DB_URL, readonly: true)
         } catch {
@@ -51,10 +57,13 @@ class TransitDataFetcher: NSObject, ObservableObject, CLLocationManagerDelegate 
         
         let (data, response) = try await URLSession.shared.data(for: URLRequest(url: url))
         guard (response as? HTTPURLResponse)?.statusCode == 200 else { throw FetchError.badRequest }
+        let permission = await locationManager.requestPermission(with: .whenInUsage)
+        if permission != .authorizedWhenInUse {
+            print("not permitted")
+        }
         let locationUpdate = try await locationManager.requestLocation()
         
         Task { @MainActor in
-            print("hi")
             feedMessage = try TransitRealtime_FeedMessage(serializedData: data)
             switch locationUpdate {
                 case .didUpdateLocations(let locations):

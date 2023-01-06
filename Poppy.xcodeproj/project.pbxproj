@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		CD09A22F2967EE570081DD2A /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E542137125387A0200CCC9C3 /* SwiftUI.framework */; };
+		CD09A2302967F1D70081DD2A /* DataModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDBC920B2946E0BC00679FDA /* DataModels.swift */; };
 		CD17D0E029484C7600D99D7C /* GTFS.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD17D0DF29484C7600D99D7C /* GTFS.swift */; };
 		CD2D580A2964FF2B006EEAF3 /* AsyncLocationKit in Frameworks */ = {isa = PBXBuildFile; productRef = CD2D58092964FF2B006EEAF3 /* AsyncLocationKit */; };
 		CD2D584429664C1C006EEAF3 /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E542136F25387A0200CCC9C3 /* WidgetKit.framework */; };
@@ -16,7 +16,6 @@
 		CD2D584A29664C1C006EEAF3 /* Widget.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD2D584929664C1C006EEAF3 /* Widget.swift */; };
 		CD2D584C29664C1F006EEAF3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CD2D584B29664C1F006EEAF3 /* Assets.xcassets */; };
 		CD2D585529665D4C006EEAF3 /* GTFS.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD17D0DF29484C7600D99D7C /* GTFS.swift */; };
-		CD2D585629665D4C006EEAF3 /* DataModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDBC920B2946E0BC00679FDA /* DataModels.swift */; };
 		CD2D585829666A5A006EEAF3 /* gtfs-realtime.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDBC920C2946E0BC00679FDA /* gtfs-realtime.pb.swift */; };
 		CD2D585929666A5A006EEAF3 /* gtfs.db in Resources */ = {isa = PBXBuildFile; fileRef = CD756B68294CE82400934CFE /* gtfs.db */; };
 		CD504AE8296786F0001F05D0 /* AsyncLocationKit in Frameworks */ = {isa = PBXBuildFile; productRef = CD504AE7296786F0001F05D0 /* AsyncLocationKit */; };
@@ -84,7 +83,6 @@
 				CD90BDB02946DB3900CE1056 /* protoc-gen-swift in Frameworks */,
 				CD90BDAE2946DB3900CE1056 /* SwiftProtobufPluginLibrary in Frameworks */,
 				CD90BDAC2946DB3900CE1056 /* SwiftProtobuf in Frameworks */,
-				CD09A22F2967EE570081DD2A /* SwiftUI.framework in Frameworks */,
 				CD2D580A2964FF2B006EEAF3 /* AsyncLocationKit in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -290,8 +288,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				CD2D585529665D4C006EEAF3 /* GTFS.swift in Sources */,
-				CD2D585629665D4C006EEAF3 /* DataModels.swift in Sources */,
 				CD2D585829666A5A006EEAF3 /* gtfs-realtime.pb.swift in Sources */,
+				CD09A2302967F1D70081DD2A /* DataModels.swift in Sources */,
 				CD2D584A29664C1C006EEAF3 /* Widget.swift in Sources */,
 				CD2D584829664C1C006EEAF3 /* WidgetBundle.swift in Sources */,
 			);
