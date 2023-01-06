@@ -15,6 +15,7 @@ struct CustomColor {
 
 struct NearbyStationView: View, Sendable {
     @EnvironmentObject var fetcher: TransitDataFetcher
+    @Environment(\.scenePhase) var scenePhase
     
     var body: some View {
         VStack {
@@ -94,6 +95,13 @@ struct NearbyStationView: View, Sendable {
                 try await fetcher.fetchData()
             } catch {
                 print("Unexpected error: \(error)")
+            }
+        }
+        .onChange(of: scenePhase) { newPhase in
+            if newPhase == .active {
+                Task {
+                    try? await fetcher.fetchData()
+                }
             }
         }
     }
