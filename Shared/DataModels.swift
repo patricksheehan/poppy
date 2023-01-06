@@ -54,6 +54,7 @@ class TransitDataFetcher: NSObject, ObservableObject, CLLocationManagerDelegate 
         let locationUpdate = try await locationManager.requestLocation()
         
         Task { @MainActor in
+            print("hi")
             feedMessage = try TransitRealtime_FeedMessage(serializedData: data)
             switch locationUpdate {
                 case .didUpdateLocations(let locations):

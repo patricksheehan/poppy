@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		CD09A22F2967EE570081DD2A /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E542137125387A0200CCC9C3 /* SwiftUI.framework */; };
 		CD17D0E029484C7600D99D7C /* GTFS.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD17D0DF29484C7600D99D7C /* GTFS.swift */; };
 		CD2D580A2964FF2B006EEAF3 /* AsyncLocationKit in Frameworks */ = {isa = PBXBuildFile; productRef = CD2D58092964FF2B006EEAF3 /* AsyncLocationKit */; };
 		CD2D584429664C1C006EEAF3 /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E542136F25387A0200CCC9C3 /* WidgetKit.framework */; };
@@ -14,10 +15,8 @@
 		CD2D584829664C1C006EEAF3 /* WidgetBundle.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD2D584729664C1C006EEAF3 /* WidgetBundle.swift */; };
 		CD2D584A29664C1C006EEAF3 /* Widget.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD2D584929664C1C006EEAF3 /* Widget.swift */; };
 		CD2D584C29664C1F006EEAF3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CD2D584B29664C1F006EEAF3 /* Assets.xcassets */; };
-		CD2D585029664C1F006EEAF3 /* PoppyWidgetExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = CD2D584329664C1C006EEAF3 /* PoppyWidgetExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		CD2D585529665D4C006EEAF3 /* GTFS.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD17D0DF29484C7600D99D7C /* GTFS.swift */; };
 		CD2D585629665D4C006EEAF3 /* DataModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDBC920B2946E0BC00679FDA /* DataModels.swift */; };
-		CD2D585729665D4C006EEAF3 /* UI.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDBC92262946E0BC00679FDA /* UI.swift */; };
 		CD2D585829666A5A006EEAF3 /* gtfs-realtime.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDBC920C2946E0BC00679FDA /* gtfs-realtime.pb.swift */; };
 		CD2D585929666A5A006EEAF3 /* gtfs.db in Resources */ = {isa = PBXBuildFile; fileRef = CD756B68294CE82400934CFE /* gtfs.db */; };
 		CD504AE8296786F0001F05D0 /* AsyncLocationKit in Frameworks */ = {isa = PBXBuildFile; productRef = CD504AE7296786F0001F05D0 /* AsyncLocationKit */; };
@@ -40,30 +39,6 @@
 		CDBC92402946E0BC00679FDA /* App.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDBC92272946E0BC00679FDA /* App.swift */; };
 		E55551B328E1D3FF005A5321 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = E55551B228E1D3FF005A5321 /* README.md */; };
 /* End PBXBuildFile section */
-
-/* Begin PBXContainerItemProxy section */
-		CD2D584E29664C1F006EEAF3 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = E542134E253879B700CCC9C3 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = CD2D584229664C1C006EEAF3;
-			remoteInfo = PoppyWidgetExtension;
-		};
-/* End PBXContainerItemProxy section */
-
-/* Begin PBXCopyFilesBuildPhase section */
-		E542137F25387A0600CCC9C3 /* Embed Foundation Extensions */ = {
-			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
-			dstPath = "";
-			dstSubfolderSpec = 13;
-			files = (
-				CD2D585029664C1F006EEAF3 /* PoppyWidgetExtension.appex in Embed Foundation Extensions */,
-			);
-			name = "Embed Foundation Extensions";
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		CD17D0DF29484C7600D99D7C /* GTFS.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GTFS.swift; sourceTree = "<group>"; };
@@ -109,6 +84,7 @@
 				CD90BDB02946DB3900CE1056 /* protoc-gen-swift in Frameworks */,
 				CD90BDAE2946DB3900CE1056 /* SwiftProtobufPluginLibrary in Frameworks */,
 				CD90BDAC2946DB3900CE1056 /* SwiftProtobuf in Frameworks */,
+				CD09A22F2967EE570081DD2A /* SwiftUI.framework in Frameworks */,
 				CD2D580A2964FF2B006EEAF3 /* AsyncLocationKit in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -146,7 +122,6 @@
 				CDBC92262946E0BC00679FDA /* UI.swift */,
 				CDBC92112946E0BC00679FDA /* App.entitlements */,
 				CDBC92122946E0BC00679FDA /* Info.plist */,
-				CDBC92102946E0BC00679FDA /* Supporting Files */,
 			);
 			path = App;
 			sourceTree = "<group>";
@@ -159,13 +134,6 @@
 				CDBC920F2946E0BC00679FDA /* Assets.xcassets */,
 			);
 			path = Resources;
-			sourceTree = "<group>";
-		};
-		CDBC92102946E0BC00679FDA /* Supporting Files */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = "Supporting Files";
 			sourceTree = "<group>";
 		};
 		E542134D253879B700CCC9C3 = {
@@ -230,12 +198,10 @@
 				E5421352253879B700CCC9C3 /* Sources */,
 				E5421353253879B700CCC9C3 /* Frameworks */,
 				E5421354253879B700CCC9C3 /* Resources */,
-				E542137F25387A0600CCC9C3 /* Embed Foundation Extensions */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				CD2D584F29664C1F006EEAF3 /* PBXTargetDependency */,
 			);
 			name = Poppy;
 			packageProductDependencies = (
@@ -328,7 +294,6 @@
 				CD2D585829666A5A006EEAF3 /* gtfs-realtime.pb.swift in Sources */,
 				CD2D584A29664C1C006EEAF3 /* Widget.swift in Sources */,
 				CD2D584829664C1C006EEAF3 /* WidgetBundle.swift in Sources */,
-				CD2D585729665D4C006EEAF3 /* UI.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -345,14 +310,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
-
-/* Begin PBXTargetDependency section */
-		CD2D584F29664C1F006EEAF3 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = CD2D584229664C1C006EEAF3 /* PoppyWidgetExtension */;
-			targetProxy = CD2D584E29664C1F006EEAF3 /* PBXContainerItemProxy */;
-		};
-/* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
 		CD2D585229664C1F006EEAF3 /* Debug */ = {
@@ -534,7 +491,6 @@
 		E5421366253879BB00CCC9C3 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = NO;
@@ -561,7 +517,6 @@
 		E5421367253879BB00CCC9C3 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = NO;
