@@ -1,120 +1,6 @@
-import CoreLocation
 import SQLite
 import Foundation
-import AsyncLocationKit
-
-struct StopArrivals {
-    let stopName: String
-    var routes: [RouteArrivals]
-}
-
-struct RouteArrivals: Identifiable {
-    let id = UUID()
-    let routeName: String
-    var arrivalMinutes: [Int]
-}
-
-let GTFS_DB_URL = Bundle.main.path(forResource: "gtfs", ofType: "db")!
-let sampleStop = Stop(stopID: "Fake", stopName: "Sample Stop", platformIDs: ["Fake"], distanceMiles: 1.5)
-let sampleDepartures = ["Sample Route": [1, 4, 45]]
-
-
-
-class TransitDataFetcher: NSObject, ObservableObject, CLLocationManagerDelegate {
-    @Published var departuresMinutes: [String: [Int]] = [:]
-    @Published var closestStop: Stop = sampleStop
-    @Published var lastUpdated: Date?
-    
-    let gtfsrtUrlString = "https://api.bart.gov/gtfsrt/tripupdate.aspx"
-    var feedMessage: TransitRealtime_FeedMessage?
-    var locationManager = AsyncLocationManager(desiredAccuracy: .hundredMetersAccuracy)
-    var userLocation: CLLocation = CLLocation(latitude: 37.764831501887876, longitude: -122.42142043985223)
-    var gtfsDb: Connection?
-    
-    override init() {
-        super.init()
-        Task {
-            let permission = await locationManager.requestPermission(with: .whenInUsage)
-            if permission != .authorizedWhenInUse {
-                print("not authorized")
-            }
-        }
-        do {
-            gtfsDb = try Connection(GTFS_DB_URL, readonly: true)
-        } catch {
-            print("Not able to connect to DB")
-        }
-    }
-    
-    enum FetchError: Error {
-        case badRequest
-        case badJSON
-    }
-    
-    func fetchData() async
-    throws  {
-        guard let url = URL(string: gtfsrtUrlString) else { return }
-        
-        let (data, response) = try await URLSession.shared.data(for: URLRequest(url: url))
-        guard (response as? HTTPURLResponse)?.statusCode == 200 else { throw FetchError.badRequest }
-        let permission = await locationManager.requestPermission(with: .whenInUsage)
-        if permission != .authorizedWhenInUse {
-            print("not permitted")
-        }
-        let locationUpdate = try await locationManager.requestLocation()
-        
-        Task { @MainActor in
-            feedMessage = try TransitRealtime_FeedMessage(serializedData: data)
-            switch locationUpdate {
-                case .didUpdateLocations(let locations):
-                    userLocation = locations.last!
-                case .didPaused, .didResume, .none, .didFailWith:
-                    print("no location update")
-            }
-            calculateDepartures()
-        }
-    }
-    
-    func calculateDepartures() {
-        let now = Date()
-        var updatedDepartures: [String: Date]?
-        
-        // Find the closest station to the user.
-        closestStop = getClosestStopSQL(location: userLocation, db: gtfsDb!)!
-        
-        // Figure out the scheduled departures for that station.
-        let activeServiceIDs = getActiveServices(date: now, db: gtfsDb!)
-        let departures = getScheduledDepartures(stop: closestStop, serviceIDs: activeServiceIDs, date: now, db: gtfsDb!)
-        
-        if feedMessage != nil {
-            updatedDepartures = updateDepartures(stop: closestStop, feedMessage: feedMessage!, departures: departures)
-        } else {
-            updatedDepartures = departures
-        }
-        
-        // Convert from dates to the next few departure times in relative minutes, by route.
-        let routeDepartures = getRouteDepartures(departures: updatedDepartures!, db: gtfsDb!)
-        let nextThreeDepartures = routeDepartures.mapValues { dates in
-            return dates.sorted(by: <).prefix(3)
-        }
-        departuresMinutes = nextThreeDepartures.mapValues { dates in
-            return dates.map { date in
-                let minutesUntilDate = Int(date.timeIntervalSinceNow / 60)
-                return minutesUntilDate
-            }
-        }
-        departuresMinutes = departuresMinutes.mapValues { minutes in
-            return minutes.filter { minute in
-                return minute <= 120
-            }
-        }
-        departuresMinutes = departuresMinutes.filter { route, departures in
-            return !departures.isEmpty
-        }
-        lastUpdated = now
-    }
-}
-
+import CoreLocation
 
 func getNoonMinusTwelveHours(date: Date) -> Date {
     let calendar = Calendar.current
@@ -318,4 +204,26 @@ func getRouteDepartures(departures: [String: Date], db: Connection) -> [String: 
     return routeDepartures
 }
 
+// Returns the next three departures for the given routes in minutes.
+func nextThreeDepartures(departures: [String: [Date]]) -> [String: [Int]] {
+    let nextThreeDepartures = departures.mapValues { dates in
+        return dates.sorted(by: <).prefix(3)
+    }
+    var departuresMinutes = nextThreeDepartures.mapValues { dates in
+        return dates.map { date in
+            let minutesUntilDate = Int(date.timeIntervalSinceNow / 60)
+            return minutesUntilDate
+        }
+    }
+    departuresMinutes = departuresMinutes.mapValues { minutes in
+        return minutes.filter { minute in
+            return minute <= 120
+        }
+    }
+    departuresMinutes = departuresMinutes.filter { route, departures in
+        return !departures.isEmpty
+    }
+    
+    return departuresMinutes
+}
 
