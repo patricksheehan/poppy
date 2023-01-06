@@ -101,7 +101,6 @@ class TransitDataFetcher: NSObject, ObservableObject, CLLocationManagerDelegate 
         departuresMinutes = departuresMinutes.filter { route, departures in
             return !departures.isEmpty
         }
-        
         lastUpdated = now
     }
 }
