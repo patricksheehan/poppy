@@ -74,6 +74,6 @@
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
 	<key>TRANSITLAND_API_KEY</key>
-	<string>$(TRANSITLAND_API_KEY)</string>
+	<string>TODO</string>
 </dict>
 </plist>
