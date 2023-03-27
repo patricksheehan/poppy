@@ -227,3 +227,38 @@ func nextThreeDepartures(departures: [String: [Date]]) -> [String: [Int]] {
     return departuresMinutes
 }
 
+
+// Transitland Utils, unused since for now we're sticking with a local GTFS DB.
+func makeTransitlandRequest(route: String, params: [String: String]) async -> [String: Any]? {
+    do {
+        let baseQueryParams = [
+            URLQueryItem(name: "format", value: "json"),
+            URLQueryItem(name: "apikey", value: TRANSITLAND_API_KEY),
+        ]
+        let baseTransitlandUrl = URL(string: "https://transit.land/api/v2/rest/" + route)!
+        var urlWithParams = URLComponents(url: baseTransitlandUrl, resolvingAgainstBaseURL: false)!
+        urlWithParams.queryItems = baseQueryParams + params.map {
+            URLQueryItem(name: $0, value: $1)
+        }
+        print(urlWithParams.url!)
+        let (data, _) = try await URLSession.shared.data(for: URLRequest(url: urlWithParams.url!))
+        let responseObject = (try? JSONSerialization.jsonObject(with: data)) as! [String: Any]
+        return responseObject
+    } catch {
+        print("Error making Transitland request: \(error)")
+        return nil
+    }
+}
+
+
+func getClosestStationTransitland(location: CLLocation) async -> Stop {
+    let params: [String: String] = [
+        "lat": String(location.coordinate.latitude),
+        "lon": String(location.coordinate.longitude),
+        "feed_onestop_id": "f-sf~bay~area~rg",
+        "radius": "10000"
+    ]
+    let stopDict = await makeTransitlandRequest(route: "stops" , params: params)!
+    let stop = Stop(stopID: stopDict["onestop_id"] as! String, stopName: stopDict["name"] as! String, platformIDs: [])
+    return stop
+}

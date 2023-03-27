@@ -1,3 +1,4 @@
+import BackgroundTasks
 import SwiftUI
 
 @main

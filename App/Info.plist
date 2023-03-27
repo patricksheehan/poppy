@@ -46,8 +46,16 @@
 	</dict>
 	<key>UIApplicationSupportsIndirectInputEvents</key>
 	<true/>
+	<key>UIBackgroundModes</key>
+	<array>
+		<string>processing</string>
+	</array>
 	<key>UILaunchScreen</key>
 	<dict/>
+	<key>BGTaskSchedulerPermittedIdentifiers</key>
+	<array>
+		<string>pjsheehan.Poppy.RefreshGTFS</string>
+	</array>
 	<key>UIRequiredDeviceCapabilities</key>
 	<array>
 		<string>armv7</string>
@@ -65,5 +73,7 @@
 		<string>UIInterfaceOrientationLandscapeLeft</string>
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
+	<key>TRANSITLAND_API_KEY</key>
+	<string>$(TRANSITLAND_API_KEY)</string>
 </dict>
 </plist>
