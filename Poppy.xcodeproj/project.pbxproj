@@ -49,7 +49,6 @@
 		CD2D584929664C1C006EEAF3 /* Widget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Widget.swift; sourceTree = "<group>"; };
 		CD2D584B29664C1F006EEAF3 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		CD2D584D29664C1F006EEAF3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		CD53B097299C33B6008A7AB6 /* gtfs_raw */ = {isa = PBXFileReference; lastKnownFileType = folder; path = gtfs_raw; sourceTree = "<group>"; };
 		CD756B68294CE82400934CFE /* gtfs.db */ = {isa = PBXFileReference; lastKnownFileType = file; path = gtfs.db; sourceTree = "<group>"; };
 		CD756B702960220000934CFE /* RobotoMono-Thin.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "RobotoMono-Thin.ttf"; sourceTree = "<group>"; };
 		CD756B73296022C400934CFE /* RobotoMono-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "RobotoMono-Regular.ttf"; sourceTree = "<group>"; };
@@ -60,7 +59,6 @@
 		CDBC92122946E0BC00679FDA /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		CDBC92262946E0BC00679FDA /* UI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UI.swift; sourceTree = "<group>"; };
 		CDBC92272946E0BC00679FDA /* App.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = App.swift; sourceTree = "<group>"; };
-		CDC1DAD62996D830009E6682 /* SecretsConfig.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = SecretsConfig.xcconfig; sourceTree = "<group>"; };
 		E5421356253879B700CCC9C3 /* Poppy.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Poppy.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E542136F25387A0200CCC9C3 /* WidgetKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WidgetKit.framework; path = System/Library/Frameworks/WidgetKit.framework; sourceTree = SDKROOT; };
 		E542137125387A0200CCC9C3 /* SwiftUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftUI.framework; path = System/Library/Frameworks/SwiftUI.framework; sourceTree = SDKROOT; };
@@ -109,7 +107,6 @@
 		CD504AEE29678DC1001F05D0 /* Shared */ = {
 			isa = PBXGroup;
 			children = (
-				CD53B097299C33B6008A7AB6 /* gtfs_raw */,
 				CD756B68294CE82400934CFE /* gtfs.db */,
 				CDBC920B2946E0BC00679FDA /* Models.swift */,
 				CDBC920C2946E0BC00679FDA /* gtfs-realtime.pb.swift */,
@@ -127,7 +124,6 @@
 				CDBC92262946E0BC00679FDA /* UI.swift */,
 				CDBC92112946E0BC00679FDA /* App.entitlements */,
 				CDBC92122946E0BC00679FDA /* Info.plist */,
-				CDC1DAD62996D830009E6682 /* SecretsConfig.xcconfig */,
 			);
 			path = App;
 			sourceTree = "<group>";
@@ -322,7 +318,6 @@
 /* Begin XCBuildConfiguration section */
 		CD2D585229664C1F006EEAF3 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = CDC1DAD62996D830009E6682 /* SecretsConfig.xcconfig */;
 			buildSettings = {
 				APPLICATION_EXTENSION_API_ONLY = YES;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -353,7 +348,6 @@
 		};
 		CD2D585329664C1F006EEAF3 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = CDC1DAD62996D830009E6682 /* SecretsConfig.xcconfig */;
 			buildSettings = {
 				APPLICATION_EXTENSION_API_ONLY = YES;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -384,7 +378,6 @@
 		};
 		E5421363253879BB00CCC9C3 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = CDC1DAD62996D830009E6682 /* SecretsConfig.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ANALYZER_NONNULL = YES;
@@ -446,7 +439,6 @@
 		};
 		E5421364253879BB00CCC9C3 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = CDC1DAD62996D830009E6682 /* SecretsConfig.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ANALYZER_NONNULL = YES;
@@ -502,7 +494,6 @@
 		};
 		E5421366253879BB00CCC9C3 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = CDC1DAD62996D830009E6682 /* SecretsConfig.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -529,7 +520,6 @@
 		};
 		E5421367253879BB00CCC9C3 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = CDC1DAD62996D830009E6682 /* SecretsConfig.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
