@@ -42,7 +42,7 @@ jobs:
           git config user.email "<>"
           git add ${{ github.workspace }}/Shared/gtfs.db
           git commit -m "Update to latest GTFS database"
-          git push origin master
+          git push origin main
       
         
           
