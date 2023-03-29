@@ -20,7 +20,7 @@ jobs:
         with:
           node-version: 19.3.x
           cache: 'npm'
-          cache-dependency-path: ${{ github.workspace }}/poppy/.github/workflows/package-lock.json
+          cache-dependency-path: ${{ github.workspace }}/.github/workflows/package-lock.json
       - name: Install node-gtfs
         run: npm install gtfs -g
       - name: Download latest GTFS database
