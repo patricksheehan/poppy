@@ -23,7 +23,22 @@ jobs:
           cache-dependency-path: ${{ github.workspace }}/.github/workflows/package-lock.json
       - name: Install node-gtfs
         run: npm install gtfs -g
+      - name: Install sqldiff tool
+        uses: awalsh128/cache-apt-pkgs-action@latest
+        with:
+          packages: sqlite3
       - name: Download latest GTFS database
         run: gtfs-import --gtfsUrl http://www.bart.gov/dev/schedules/google_transit.zip --sqlitePath gtfs_new.db
       - name: See if there is a difference between the current and latest GTFS database
-        run: sqldiff gtfs_new.db ${{ github.workspace }}/poppy/Shared/gtfs.db
+        run: sqldiff gtfs_new.db ${{ github.workspace }}/Shared/gtfs.db 2>&1 | grep "^"
+      - name: Update if a difference is detected
+        if: ${{ failure() }}
+        run: |
+          cp gtfs_new.db ${{ github.workspace }}/Shared/gtfs.db
+          git config user.name "GitHub Actions Bot"
+          git config user.email "<>"
+          git add ${{ github.workspace }}/Shared/gtfs.db
+          git commit -m "Update to latest GTFS database"
+          git push origin master
+          
+        
