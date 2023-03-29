@@ -11,7 +11,7 @@ on:
   workflow_dispatch:
 jobs:
   GTFS-Check-Update:
-    runs-on: ubuntu-latest
+    runs-on: macos-latest
     steps:
       - name: Check out repository code
         uses: actions/checkout@v3
@@ -24,9 +24,7 @@ jobs:
       - name: Install node-gtfs
         run: npm install gtfs -g
       - name: Install sqldiff tool
-        uses: awalsh128/cache-apt-pkgs-action@latest
-        with:
-          packages: sqlite3
+        run: brew install sqldiff
       - name: Download latest GTFS database
         run: gtfs-import --gtfsUrl http://www.bart.gov/dev/schedules/google_transit.zip --sqlitePath gtfs_new.db
       - name: See if there is a difference between the current and latest GTFS database
