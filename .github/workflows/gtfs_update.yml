@@ -19,8 +19,10 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: 19.3.x
+          cache: 'npm'
+          cache-dependency-path: ${{ github.workspace }}/poppy/.github/workflows/package-lock.json
       - name: Install node-gtfs
-        run: npm install gtfs
+        run: npm install gtfs -g
       - name: Download latest GTFS database
         run: gtfs-import --gtfsUrl http://www.bart.gov/dev/schedules/google_transit.zip --sqlitePath gtfs_new.db
       - name: See if there is a difference between the current and latest GTFS database
