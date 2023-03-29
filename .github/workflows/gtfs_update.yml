@@ -1,0 +1,25 @@
+# This is a Github Action which, each day:
+#   - Uses a node utility (node-gtfs) to pull the latest GTFS database
+#   - Compares the latest GTFS database to the current one
+#   - If there is a difference, commits the new GTFS database to main, triggering an app update
+
+name: GTFS Database Update Checker
+on:
+  schedule:
+  # * is a special character in YAML so you have to quote this string
+  - cron:  '30 4 * * *'
+jobs:
+  GTFS-Check-Update:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository code
+        uses: actions/checkout@v3
+      - name: Setup node
+        uses: actions/setup-node@v3
+        with:
+          node-version: 19.3.x
+          cache: npm
+      - name: Install node-gtfs
+        run: npm install gtfs
+      - name: Download latest GTFS database
+        run: gtfs-import --gtfsUrl http://www.bart.gov/dev/schedules/google_transit.zip --sqlitePath gtfs_new.db
