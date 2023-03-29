@@ -23,3 +23,5 @@ jobs:
         run: npm install gtfs
       - name: Download latest GTFS database
         run: gtfs-import --gtfsUrl http://www.bart.gov/dev/schedules/google_transit.zip --sqlitePath gtfs_new.db
+      - name: See if there is a difference between the current and latest GTFS database
+        run: sqldiff gtfs_new.db ${{ github.workspace }}/poppy/Shared/gtfs.db
