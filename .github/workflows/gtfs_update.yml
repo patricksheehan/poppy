@@ -6,8 +6,9 @@
 name: GTFS Database Update Checker
 on:
   schedule:
-  # * is a special character in YAML so you have to quote this string
-  - cron:  '30 4 * * *'
+    # * is a special character in YAML so you have to quote this string
+    - cron:  '30 4 * * *'
+  workflow_dispatch:
 jobs:
   GTFS-Check-Update:
     runs-on: ubuntu-latest
