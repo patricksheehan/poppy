@@ -20,7 +20,7 @@ Poppy is an iOS app written in swift which utilizes the [General Transit Feed Sp
 - find the nearest station
 - determine the next 3 departures for each route at that station (in minutes)
 
-Schedules updated with a github action which pulls the latest gtfs file and makes a commit if there are changes. This triggers an
+Schedules are kept up-to-date via a daily github action which pulls the latest gtfs file and makes a commit if there are changes. This triggers an
 app update via Xcode cloud tools.
 
 ## Status
