@@ -22,7 +22,7 @@ jobs:
           cache: 'npm'
           cache-dependency-path: ${{ github.workspace }}/.github/workflows/package-lock.json
       - name: Install node-gtfs
-        run: npm install
+        run: npm --prefix ${{ github.workspace }}/.github/workflows install
       - name: Download latest GTFS database
         run: npx gtfs-import --gtfsUrl http://www.bart.gov/dev/schedules/google_transit.zip --sqlitePath gtfs_new.db
       - name: Attempt to commit the new DB
