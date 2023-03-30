@@ -29,6 +29,7 @@ jobs:
         run: gtfs-import --gtfsUrl http://www.bart.gov/dev/schedules/google_transit.zip --sqlitePath gtfs_new.db
       - name: See if there is a difference between the current and latest GTFS database
         run: sqldiff gtfs_new.db ${{ github.workspace }}/Shared/gtfs.db 2>&1 | grep "^"
+        continue-on-error: true
         id: sqldiff-step
       - name: No update required
         if: steps.sqldiff-step.conclusion == 'failure'
