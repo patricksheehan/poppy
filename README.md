@@ -1,14 +1,16 @@
 # Poppy
+Poppy is the transit app for locals.
 
 <p align="center">
   <img src="Shared/Resources/example_screenshot.png" height="600"/>
 </p>
 
-Poppy is the transit app for locals. Poppy is the quickest way to know when the next train/bus will depart from the station(s) nearest you.
+Poppy:
 
-Poppy does **NOT** tell you how to get where you're going or provide any information other than real-time departures.
+  ✔️ is the quickest way to know when the next train/bus will depart from the station(s) nearest you
+  ✖️ will tell you how to get where you're going
 
-For now, Poppy is an experiment and only supports BART in the SF Bay Area.
+Note: Poppy is currently a proof-of-concept and only supports BART in the SF Bay Area.
 
 ## How it works
 
