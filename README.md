@@ -9,7 +9,7 @@ Poppy:
 
   ✔️ is the quickest way to know when the next train/bus will depart from the station(s) nearest you
   
-  ✖️ will tell you how to get where you're going
+  ✖️ will **NOT** tell you how to get where you're going
 
 Note: Poppy is currently a proof-of-concept and only supports BART in the SF Bay Area.
 
