@@ -44,6 +44,7 @@
 /* Begin PBXFileReference section */
 		CD0B8BFD29680E310060C16A /* Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
 		CD0B8C00296810340060C16A /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		CD12717529D6092100F4CF26 /* example_screenshot.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = example_screenshot.png; sourceTree = "<group>"; };
 		CD2D584329664C1C006EEAF3 /* PoppyWidgetExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = PoppyWidgetExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		CD2D584729664C1C006EEAF3 /* WidgetBundle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WidgetBundle.swift; sourceTree = "<group>"; };
 		CD2D584929664C1C006EEAF3 /* Widget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Widget.swift; sourceTree = "<group>"; };
@@ -131,6 +132,7 @@
 		CDBC920E2946E0BC00679FDA /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				CD12717529D6092100F4CF26 /* example_screenshot.png */,
 				CD756B73296022C400934CFE /* RobotoMono-Regular.ttf */,
 				CD756B702960220000934CFE /* RobotoMono-Thin.ttf */,
 				CDBC920F2946E0BC00679FDA /* Assets.xcassets */,
