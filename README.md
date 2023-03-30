@@ -4,10 +4,11 @@
   <img src="Shared/Resources/example_screenshot.png" height="600"/>
 </p>
 
-Poppy is a transit app for locals. This means it has no features to tell you *how* to get where you want to go. Instead
-Poppy is 100% focused on telling users *when* the next train/bus will come for the stations nearest you.
+Poppy is the transit app for locals. Poppy is the quickest way to know when the next train/bus will depart from the station(s) nearest you.
 
-For now, Poppy is just an experiment and only supports BART in the SF Bay Area.
+Poppy does **NOT** tell you how to get where you're going or provide any information other than real-time departures.
+
+For now, Poppy is an experiment and only supports BART in the SF Bay Area.
 
 ## How it works
 
@@ -16,7 +17,7 @@ Poppy is an iOS app written in swift which utilizes the [General Transit Feed Sp
 - find the nearest station
 - determine the next 3 departures for each route at that station (in minutes)
 
-I keep the schedules updated with a github action which pulls the latest gtfs file and makes a commit if there are changes. This triggers an
+Schedules updated with a github action which pulls the latest gtfs file and makes a commit if there are changes. This triggers an
 app update via Xcode cloud tools.
 
 ## Status
@@ -31,4 +32,4 @@ Poppy is open source, I welcome any improvements, especially those which:
 - enable quicker time-to-results (e.g. a widget in iOS)
 - support multiple transit agencies (e.g. AC Transit, Muni)
 - provide better user experience/edge case handling
-- provide better data updating (r)
+- provide better data updating
