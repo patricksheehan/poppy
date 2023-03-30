@@ -1,7 +1,7 @@
 # Poppy
 
 <p align="center">
-  <img src="Shared/Resources/example_screenshot.png"/>
+  <img src="Shared/Resources/example_screenshot.png" height="600"/>
 </p>
 
 Poppy is a transit app for locals. This means it has no features to tell you *how* to get where you want to go. Instead
