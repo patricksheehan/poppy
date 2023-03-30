@@ -24,7 +24,7 @@ jobs:
       - name: Install node-gtfs
         run: npm --prefix ${{ github.workspace }}/.github/workflows install
       - name: Download latest GTFS database
-        run: npx gtfs-import --gtfsUrl http://www.bart.gov/dev/schedules/google_transit.zip --sqlitePath gtfs_new.db
+        run: npx --prefix ${{ github.workspace }}/.github/workflows gtfs-import --gtfsUrl http://www.bart.gov/dev/schedules/google_transit.zip --sqlitePath gtfs_new.db
       - name: Attempt to commit the new DB
         # This will only run successfully if there was a change to the db
         run: |
