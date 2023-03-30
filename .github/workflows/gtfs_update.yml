@@ -1,12 +1,11 @@
 # This is a Github Action which, each day:
 #   - Uses a node utility (node-gtfs) to pull the latest GTFS database
-#   - Compares the latest GTFS database to the current one
+#   - Uses git to sense if there's any change to the database
 #   - If there is a difference, commits the new GTFS database to main, triggering an app update
 
 name: GTFS Database Update Checker
 on:
   schedule:
-    # * is a special character in YAML so you have to quote this string
     - cron:  '30 4 * * *'
   workflow_dispatch:
 jobs:
