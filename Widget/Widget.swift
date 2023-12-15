@@ -3,6 +3,8 @@ import SwiftUI
 import AsyncLocationKit
 import SQLite
 import CoreLocation
+import AppIntents
+import Intents
 
 struct Provider: TimelineProvider {
     func placeholder(in context: Context) -> DeparturesEntry {
@@ -60,55 +62,6 @@ struct Provider: TimelineProvider {
     }
 }
 
-
-
-//import WidgetKit
-//import SwiftUI
-//import AsyncLocationKit
-//import SQLite
-//import CoreLocation
-//
-//struct Provider: TimelineProvider {
-//    func placeholder(in context: Context) -> DeparturesEntry {
-//        DeparturesEntry.placeholder
-//    }
-//
-//    func getSnapshot(in context: Context, completion: @escaping (DeparturesEntry) -> ()) {
-//        print("snapshot")
-//        if context.isPreview {
-//            completion(DeparturesEntry.placeholder)
-//        } else {
-//            Task {
-//                let entry = DeparturesEntry(date: Date(), closestStop: sampleStop, departuresMinutes: sampleDepartures)
-//                completion(entry)
-//            }
-//        }
-//    }
-//
-//    func getTimeline(in context: Context, completion: @escaping (Timeline<Entry>) -> ()) {
-//        print("tiomeline")
-//        Task {
-//            let gtfsDb = try Connection(GTFS_DB_URL, readonly: true)
-//            var userLocation:  CLLocation = CLLocation(latitude: 37.764831501887876, longitude: -122.42142043985223)
-//            let locationManager = AsyncLocationManager(desiredAccuracy: .hundredMetersAccuracy)
-//            let locationUpdate = try await locationManager.requestLocation()
-//            switch locationUpdate {
-//                case .didUpdateLocations(let locations):
-//                    userLocation = locations.last!
-//                case .didPaused, .didResume, .none, .didFailWith:
-//                    print("no location update")
-//            }
-//            let closestStop = getClosestStopSQL(location: userLocation, db: gtfsDb)!
-//            let date = Date()
-//            let entry = DeparturesEntry(date: date, closestStop: closestStop, departuresMinutes: sampleDepartures)
-//            let timeline = Timeline(entries: [entry], policy: .after(date.addingTimeInterval(60)))
-//            completion(timeline)
-//        }
-//    }
-//}
-//
-
-
 struct DeparturesEntry: TimelineEntry {
     let date: Date
     let closestStop: Stop
@@ -125,6 +78,29 @@ extension DeparturesEntry {
         DeparturesEntry(date: Date(), closestStop: sampleStop, departuresMinutes: sampleDepartures, isPlaceholder: true)
     }
 }
+
+struct ReloadWidgetIntent: AppIntent {
+    static var title: LocalizedStringResource = "Reload widget"
+    static var description = IntentDescription("Reload widget.")
+
+    init() {}
+
+    func perform() async throws -> some IntentResult {
+        return .result()
+    }
+}
+
+
+@available(iOSApplicationExtension 17.0, *)
+struct ReloadView: SwiftUI.View {
+
+    var body: some SwiftUI.View {
+        Button(intent: ReloadWidgetIntent()) {
+            Text("Refresh")
+        }
+    }
+}
+
 
 @available(iOS 17.0, *)
 struct PoppyWidgetEntryView : SwiftUI.View {
@@ -172,6 +148,8 @@ struct PoppyWidgetEntryView : SwiftUI.View {
                 HStack (content: {
                     Text("Last updated:")
                     Text(entry.date, style: .relative)
+                        .invalidatableContent()
+                    ReloadView()
                 })
                 .font(
                     .custom(
@@ -186,7 +164,6 @@ struct PoppyWidgetEntryView : SwiftUI.View {
             .containerBackground(CustomColor.base03, for: .widget)
             Spacer()
         })
-
         .frame(maxWidth: .infinity, maxHeight: .infinity)
     }
 }
