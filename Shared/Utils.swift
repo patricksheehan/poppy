@@ -31,6 +31,7 @@ func gtfsTimestampToDate(serviceDate: Date, gtfsTimestamp: Int) -> Date {
 
 
 func getScheduledDepartures(stop: Stop, serviceIDs: [String], date: Date, db: Connection) -> [String: Date] {
+    // Takes a stop, set of active services, and a date and returns scheduled departures for the current time.
     var tripDepartures: [String: Date] = [:]
     do {
         // Get the current timestamp relative to the service day.
