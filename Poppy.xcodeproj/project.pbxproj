@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 52;
+	objectVersion = 54;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -30,6 +30,7 @@
 		CD756B69294CE82400934CFE /* gtfs.db in Resources */ = {isa = PBXBuildFile; fileRef = CD756B68294CE82400934CFE /* gtfs.db */; };
 		CD756B712960220000934CFE /* RobotoMono-Thin.ttf in Resources */ = {isa = PBXBuildFile; fileRef = CD756B702960220000934CFE /* RobotoMono-Thin.ttf */; };
 		CD756B74296022C400934CFE /* RobotoMono-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = CD756B73296022C400934CFE /* RobotoMono-Regular.ttf */; };
+		CD8ECB642B2BCA5200F7CAF8 /* PoppyWidgetExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = CD2D584329664C1C006EEAF3 /* PoppyWidgetExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		CD90BDAC2946DB3900CE1056 /* SwiftProtobuf in Frameworks */ = {isa = PBXBuildFile; productRef = CD90BDAB2946DB3900CE1056 /* SwiftProtobuf */; };
 		CD90BDAE2946DB3900CE1056 /* SwiftProtobufPluginLibrary in Frameworks */ = {isa = PBXBuildFile; productRef = CD90BDAD2946DB3900CE1056 /* SwiftProtobufPluginLibrary */; };
 		CD90BDB02946DB3900CE1056 /* protoc-gen-swift in Frameworks */ = {isa = PBXBuildFile; productRef = CD90BDAF2946DB3900CE1056 /* protoc-gen-swift */; };
@@ -40,6 +41,30 @@
 		CDBC92402946E0BC00679FDA /* App.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDBC92272946E0BC00679FDA /* App.swift */; };
 		E55551B328E1D3FF005A5321 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = E55551B228E1D3FF005A5321 /* README.md */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		CD8ECB652B2BCA5200F7CAF8 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = E542134E253879B700CCC9C3 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = CD2D584229664C1C006EEAF3;
+			remoteInfo = PoppyWidgetExtension;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		CD8ECB672B2BCA5200F7CAF8 /* Embed Foundation Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				CD8ECB642B2BCA5200F7CAF8 /* PoppyWidgetExtension.appex in Embed Foundation Extensions */,
+			);
+			name = "Embed Foundation Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		CD0B8BFD29680E310060C16A /* Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
@@ -202,10 +227,12 @@
 				E5421352253879B700CCC9C3 /* Sources */,
 				E5421353253879B700CCC9C3 /* Frameworks */,
 				E5421354253879B700CCC9C3 /* Resources */,
+				CD8ECB672B2BCA5200F7CAF8 /* Embed Foundation Extensions */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				CD8ECB662B2BCA5200F7CAF8 /* PBXTargetDependency */,
 			);
 			name = Poppy;
 			packageProductDependencies = (
@@ -225,8 +252,9 @@
 		E542134E253879B700CCC9C3 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				BuildIndependentTargetsInParallel = YES;
 				LastSwiftUpdateCheck = 1420;
-				LastUpgradeCheck = 1410;
+				LastUpgradeCheck = 1510;
 				ORGANIZATIONNAME = "Patrick Sheehan";
 				TargetAttributes = {
 					CD2D584229664C1C006EEAF3 = {
@@ -316,6 +344,14 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		CD8ECB662B2BCA5200F7CAF8 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = CD2D584229664C1C006EEAF3 /* PoppyWidgetExtension */;
+			targetProxy = CD8ECB652B2BCA5200F7CAF8 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
 		CD2D585229664C1F006EEAF3 /* Debug */ = {
@@ -415,6 +451,7 @@
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
@@ -476,6 +513,7 @@
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;

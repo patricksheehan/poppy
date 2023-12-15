@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Scheme
-   LastUpgradeVersion = "1420"
+   LastUpgradeVersion = "1510"
    version = "1.3">
    <BuildAction
       parallelizeBuildables = "YES"
@@ -17,6 +17,20 @@
                BlueprintIdentifier = "E5421355253879B700CCC9C3"
                BuildableName = "Poppy.app"
                BlueprintName = "Poppy"
+               ReferencedContainer = "container:Poppy.xcodeproj">
+            </BuildableReference>
+         </BuildActionEntry>
+         <BuildActionEntry
+            buildForTesting = "YES"
+            buildForRunning = "YES"
+            buildForProfiling = "YES"
+            buildForArchiving = "YES"
+            buildForAnalyzing = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "CD2D584229664C1C006EEAF3"
+               BuildableName = "PoppyWidgetExtension.appex"
+               BlueprintName = "PoppyWidgetExtension"
                ReferencedContainer = "container:Poppy.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>

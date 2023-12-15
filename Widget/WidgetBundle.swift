@@ -10,6 +10,7 @@ import WidgetKit
 import SwiftUI
 
 @main
+@available(iOS 17.0, *)
 struct PoppyWidgetBundle: WidgetBundle {
     var body: some Widget {
         PoppyWidget()
